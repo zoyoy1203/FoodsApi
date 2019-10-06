@@ -3,7 +3,7 @@ const queryString = require('querystring')
 const zlib = require('zlib')
 
 const createRequest = (method, url, data, options) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {   //两个参数 resolve 异步执行成功的回调函数,reject异步执行失败的回调函数
 
         const answer = { status: 500, body: {}, cookie: []}
         const settings = {
@@ -37,7 +37,7 @@ const createRequest = (method, url, data, options) => {
                 "Connection":"Keep-Alive",
                 "Host":"api.douguo.net",
             },
-            body: queryString.stringify(data)
+            body: queryString.stringify(data)  //stringify这个方法是将一个对象序列化成一个字符串 body：需要传送的数据
         }
     
         request(
@@ -49,27 +49,8 @@ const createRequest = (method, url, data, options) => {
                     reject(answer);
                 } else {
                     try{
-                        if(options.crypto === 'gzip'){
-                            zlib.unzip(body, function (err, buffer) {
-                                const _buffer = err ? body : buffer
-                                try {
-                                  try{
-                                    answer.body = JSON.parse(encrypt.decrypt(_buffer).toString())
-                                    answer.status = answer.body.code || res.statusCode
-                                  } catch(e){
-                                    answer.body = JSON.parse(_buffer.toString())
-                                    answer.status = res.statusCode
-                                  }
-                                } catch (e) {
-                                  answer.body = _buffer.toString()
-                                  answer.status = res.statusCode
-                                }
-                                answer.status =
-                                  100 < answer.status && answer.status < 600 ? answer.status : 400
-                                if (answer.status === 200) resolve(answer)
-                                else reject(answer)
-                              });
-                              return false
+                        if(options.crypto === ''){
+                           
                         }else{
                             answer.body = JSON.parse(body)
                             answer.status = answer.body.code || res.statusCode

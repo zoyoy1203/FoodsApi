@@ -10,14 +10,14 @@ const app = express();
 // app.use(bodyParser.json())
 // app.use(bodyParser.urlencoded({extended: false}))
 
-app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", req.headers.origin); //需要显示设置来源
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Credentials",true); //带cookies7     
-    // res.header("Content-Type", "application/json;charset=utf-8");
-    next();
-});
+// app.all('*', function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", req.headers.origin); //需要显示设置来源
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+//     res.header("Access-Control-Allow-Credentials",true); //带cookies7     
+//     // res.header("Content-Type", "application/json;charset=utf-8");
+//     next();
+// });
 
 
 
@@ -26,7 +26,7 @@ fs.readdirSync(path.join(__dirname, 'module')).reverse().forEach(file => {
     if(!(/\.js$/i.test(file))) return;   //正则表达式判断文件名是否符合
     //拼接出url
     let route = '/' + file.replace(/\.js$/i, '').replace(/_/g, '/');
-    //将module里的文件赋值出
+    //将module里的文件内容赋导出
     let question = require(path.join(__dirname, 'module', file));
 
     console.log('route='+ route);
