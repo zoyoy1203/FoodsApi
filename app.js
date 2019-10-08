@@ -29,8 +29,8 @@ fs.readdirSync(path.join(__dirname, 'module')).reverse().forEach(file => {
     //将module里的文件内容赋导出
     let question = require(path.join(__dirname, 'module', file));
 
-    console.log('route='+ route);
-    console.log('question='+ question);
+    // console.log('route='+ route);
+    // console.log('question='+ question);
 
     app.use(route, (req, res) => {
         //Object.assign()对象合并

@@ -1,8 +1,9 @@
-//课堂首页
+//获取电子书数据
 module.exports = (query, request) => {
     const data = {
         client:4,
-        or:0
+        or:0,
+        type:2
     }
     return request(
         'POST',

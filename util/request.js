@@ -48,18 +48,9 @@ const createRequest = (method, url, data, options) => {
                     answer.body = { code: 502, msg: err.stack};
                     reject(answer);
                 } else {
-                    try{
-                        if(options.crypto === ''){
-                           
-                        }else{
-                            answer.body = JSON.parse(body)
-                            answer.status = answer.body.code || res.statusCode
-                        }
-                    }catch(e){
-                        answer.body = body
-                        answer.status = res.statusCode
-                    }
-                 
+                    answer.body = JSON.parse(body)
+                    answer.status = answer.body.code || res.statusCode
+                
                     answer.status =
                     100 < answer.status && answer.status < 600 ? answer.status : 400
                     if (answer.status == 200) resolve(answer)
